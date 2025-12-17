@@ -1,4 +1,5 @@
-
+import neurokit2 as nk
+import numpy as np
 
 def get_RRI(data, fs, tw):
     """
@@ -19,3 +20,31 @@ def get_RRI(data, fs, tw):
     Early Warning of Atrial Fibrillation Using Deep Learning. 
     Patterns, 2024."""
     pass
+
+    RRI_ALL = []  # List to store R-R intervals from each window
+    data_len = len(data)  # Length of the ECG data
+    ini = 0  # Initial index for storing RRI
+
+    while True:
+        end_idx = data_len - (ini * fs * 5)
+        start_idx = max(0, end_idx - (tw * fs))
+
+        if start_idx == 0:
+            break
+
+        ecg_w = data[start_idx:end_idx]  # Extract the window of ECG data
+
+        # Use NeuroKit2 to find R-peaks using the Pan-Tompkins algorithm
+        signals, info = nk.ecg_process(ecg_w, sampling_rate=fs)
+        r_peaks = info['ECG_R_Peaks']
+
+        # Calculate R-R intervals (RRI) for the current window
+        RRI = np.diff(r_peaks) / fs
+
+        # Store the calculated RRI
+        RRI_ALL.append(RRI)
+
+        ini += 1  # Update the index for the next window
+
+    RRI_ALL = RRI_ALL[::-1]  # Reverse RRI_ALL to have RRI in chronological order
+    return RRI_ALL

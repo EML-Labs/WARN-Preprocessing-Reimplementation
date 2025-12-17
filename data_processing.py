@@ -24,7 +24,7 @@ dis_tresh = 0.7; # Threshold for the coefficient of variation for segmentation
 # Directories
 # Specify input and output directories
 inputf = "data/";    # Directory containing the raw ECG data and labels
-outputf = "rp_data/"; # Output directory for the generated RPs
+outputf = "rp_data_python/"; # Output directory for the generated RPs
 os.mkdir(outputf) if not os.path.exists(outputf) else None  # Create the output directory if it does not exist
 
 # Load Samples
