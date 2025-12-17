@@ -19,8 +19,29 @@ def rp_plot(data, delay, dE):
     Patterns, 2024.
     """
 
-    N = len(data)
+    # Basic input validation
+    if data is None:
+        raise ValueError("`data` must not be None.")
+
+    # Convert to NumPy array for consistent handling
+    data = np.asarray(data)
+
+    if data.size == 0:
+        raise ValueError("`data` must not be empty.")
+
+    if not isinstance(delay, int) or delay <= 0:
+        raise ValueError("`delay` must be a positive integer.")
+
+    if not isinstance(dE, int) or dE <= 0:
+        raise ValueError("`dE` (embedding dimension) must be a positive integer.")
+
+    N = data.size
     Nrp = N - (dE - 1) * delay  # RP size
+    if Nrp <= 0:
+        raise ValueError(
+            "Length of `data` is insufficient for the given `delay` and `dE`. "
+            f"Got len(data)={N}, delay={delay}, dE={dE}."
+        )
 
     # Phase space reconstruction using embedding
     Xdim = np.zeros((Nrp, dE))
