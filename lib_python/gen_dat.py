@@ -54,10 +54,10 @@ def gen_dat(tw, dim, fs, delay, dE, dis_thresh, inputf, outputf, SAMPLES, rp):
 
             f.create_dataset(
                 "/y",
-                shape=(0,3),                    # start with 0 labels
-                maxshape=(None,3),              # unlimited along first axis
+                shape=(0, 3),                    # start with 0 labels
+                maxshape=(None, 3),              # unlimited along first axis
                 dtype='float64',
-                chunks=(1,3)
+                chunks=(1, 3)
             )
 
 
