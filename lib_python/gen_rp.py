@@ -71,7 +71,6 @@ def gen_rp(data, SEGMENTATION, file, tw, fs, img_dim, delay, dE, rp):
             rp_min = RP.min()
             rp_max = RP.max()
             RP_norm = ((RP - rp_min) / (rp_max - rp_min) * 255).round().astype(np.uint8)
-            RP = RP_norm.astype(np.uint8)
 
             cmap = plt.get_cmap('jet') 
             RP_colored = cmap(RP_norm)[:, :, :3] # Shape: (N, N, 3)
