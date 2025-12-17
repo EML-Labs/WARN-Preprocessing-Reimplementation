@@ -29,7 +29,7 @@ def data_seg(DATA, fs, LABELS, dis_thresh, tw, n_file):
     Patterns, 2024."""
 
     N = len(DATA)
-    m = fs * 60 # Sampling frequency in minutes
+    m = fs * 60  # Sampling frequency in minutes
     SR_ini = 0 # Start index for sinus rhythm
     SEGMENTATION = np.ones(N) # Initialize segmentation array with SR (1)
 
