@@ -45,7 +45,8 @@ def data_seg(DATA, fs, LABELS, dis_thresh, tw, n_file):
             PreAF = find_preaf(DATA[SR_ini:AF_ini], AF_ini, fs, dis_thresh, tw, mean_rri)
 
             SEGMENTATION[SR_ini:AF_ini] = 1 # SR segment
-            SEGMENTATION[PreAF+1:AF_ini] = 2 # Pre-AF segment
+            preaf_start = PreAF if PreAF > 0 else SR_ini
+            SEGMENTATION[preaf_start:AF_ini] = 2 # Pre-AF segment
             SEGMENTATION[AF_ini:AF_end] = 3 # AF segment
 
             SR_ini = AF_end + 1
