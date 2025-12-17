@@ -46,22 +46,23 @@ def gen_dat(tw, dim, fs, delay, dE, dis_thresh, inputf, outputf, SAMPLES, rp):
         with h5py.File(file, 'w') as f:
             f.create_dataset(
                 "/x",
-                shape=(dim, dim, 0),          # start with 0 images
-                maxshape=(dim, dim, None),    # None -> unlimited along this axis
+                shape=(0, dim, dim),           # start with 0 samples
+                maxshape=(None, dim, dim),     # unlimited along first axis
                 dtype='uint8',
-                chunks=(dim, dim, 1)          # same as MATLAB chunk size
+                chunks=(1, dim, dim)           # chunk along sample axis
             )
 
             f.create_dataset(
                 "/y",
-                shape=(3, 0),                 # start with 0 labels
-                maxshape=(3, None),           # unlimited along columns
+                shape=(0,3),                    # start with 0 labels
+                maxshape=(None,3),              # unlimited along first axis
                 dtype='float64',
-                chunks=(3, 1)
+                chunks=(1,3)
             )
+
 
         DATA = np.loadtxt(inputf + file_read)  
         DATA = DATA[:, 1]  
 
         SEGMENTATION = data_seg(DATA, fs, SAMPLES, dis_thresh, tw, i)
-        gen_rp(DATA, SEGMENTATION, file, tw, fs, [dim, dim], delay, dE, rp)
+        gen_rp(DATA, SEGMENTATION, file, tw, fs, (dim, dim), delay, dE, rp)
