@@ -79,9 +79,9 @@ def gen_rp(data, SEGMENTATION, file, tw, fs, img_dim, delay, dE, rp):
 
             scale_factor = 5
             high_res_dim = (img_dim[0] * scale_factor, img_dim[1] * scale_factor)
-            RP_high = resize(RP_gray, high_res_dim, order=0, mode='edge', anti_aliasing=False,preserve_range=True)
+            RP_high = resize(RP_gray, high_res_dim, order=0, mode='edge', anti_aliasing=False, preserve_range=True)
 
-            RP_final = resize(RP_high, img_dim, order=3, mode='reflect', anti_aliasing=True,preserve_range=True)            # RP = resize(RP, img_dim, order=1, mode='reflect', anti_aliasing=False, preserve_range=True)
+            RP_final = resize(RP_high, img_dim, order=3, mode='reflect', anti_aliasing=True, preserve_range=True)            # RP = resize(RP, img_dim, order=1, mode='reflect', anti_aliasing=False, preserve_range=True)
             RP = (RP_final * 255).astype(np.uint8)
             RP_backup = RP
 
