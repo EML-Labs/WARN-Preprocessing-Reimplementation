@@ -88,7 +88,6 @@ def gen_rp(data, SEGMENTATION, file, tw, fs, img_dim, delay, dE, rp):
         except:
 
             RP = RP_backup
-        RP = RP.astype(np.uint8)
 
         with h5py.File(file, 'a') as f:
             x_dataset = f['/x']
