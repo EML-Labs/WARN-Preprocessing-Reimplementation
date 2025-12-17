@@ -11,28 +11,6 @@ python_files = sorted([f for f in os.listdir(PYTHON_DATASET_DIR) if f.endswith("
 
 print(f"Found {len(matlab_files)} MATLAB files and {len(python_files)} Python files.")
 
-# for matlab_file, python_file in zip(matlab_files, python_files):
-#     matlab_path = os.path.join(MATLAB_DATASET_DIR, matlab_file)
-#     python_path = os.path.join(PYTHON_DATASET_DIR, python_file)
-
-#     print(f"Comparing {matlab_file} and {python_file}...")
-
-#     with h5py.File(matlab_path, "r") as f_m, h5py.File(python_path, "r") as f_p:
-#         x_m = f_m["/x"][:]
-#         y_m = f_m["/y"][:]
-#         x_p = f_p["/x"][:]
-#         y_p = f_p["/y"][:]
-
-
-#     # Per-slice MSE (138 slices)
-#     per_slice_mse = np.mean((x_m.astype(np.float64) - x_p.astype(np.float64)) ** 2, axis=(1, 2))
-
-#     print(
-#         f"[{matlab_file}] "
-#         f"mean MSE={per_slice_mse.mean():.3e}, "
-#         f"max MSE={per_slice_mse.max():.3e}"
-#     )
-
 def normalize_pixels(img):
     img = img.astype('float32')
     # Subtract mean (centers the histogram at 0)
